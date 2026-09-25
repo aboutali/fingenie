@@ -9,7 +9,7 @@ description = "Lightweight engine that bundles many free financial-data sources 
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "fingenie" }]
+authors = [{ name = "aboutali" }]
 keywords = ["finance", "stocks", "crypto", "fx", "market-data", "api"]
 
 dependencies = [
