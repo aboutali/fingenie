@@ -55,7 +55,7 @@ class Settings(BaseSettings):
 
     # behaviour
     cache_enabled: bool = True
-    user_agent: str = "fingenie/0.1 (+https://github.com/local/fingenie)"
+    user_agent: str = "fingenie/0.1 (+https://github.com/aboutali/fingenie)"
 
     # storage (Windows-correct via platformdirs)
     cache_dir: Path = Field(
