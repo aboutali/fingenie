@@ -9,6 +9,30 @@ with disagreement flagging.
 No single free API covers everything, they all have brutal free-tier limits, and
 they all use different schemas. FinGenie hides that behind one small API + CLI.
 
+**Scope:** FinGenie stays a lean personal tool for prices, history and FX. It
+does not aim to become a research platform.
+
+## FinGenie and OpenBB
+
+The [OpenBB Platform](https://github.com/OpenBB-finance/OpenBB) also puts many
+data providers behind one normalized API. Use OpenBB when you need breadth:
+fundamentals, macro series, SEC filings, dozens of providers.
+
+FinGenie covers a narrower need. It focuses on staying inside free tiers:
+
+| | FinGenie | OpenBB |
+|---|---|---|
+| Automatic fallback on error or rate limit | yes | not documented (static provider priority) |
+| Local response cache | yes | not documented |
+| Rate budgets stored across restarts | yes | not documented |
+| Cross-source merge with disagreement flags | yes | not documented |
+| CoinGecko, Finnhub, Twelve Data | yes | no |
+| FRED, SEC EDGAR, many more providers | no | yes |
+| License | MIT | AGPL-3.0 |
+| Install size | 10 dependencies | ~30 packages in the base install |
+
+OpenBB comparison checked against OpenBB v4.7.2 (September 2026).
+
 ## What's in v1 (prices-first)
 
 `quote` · `history` · `fx` across equities/ETFs, crypto, FX and (best-effort)
@@ -28,9 +52,9 @@ work with zero configuration.**
 
 ## Install
 
-```powershell
+```bash
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+source .venv/bin/activate        # Windows: .\.venv\Scripts\Activate.ps1
 pip install -e ".[dev]"
 ```
 
@@ -44,7 +68,7 @@ the no-key sources.
 
 CLI:
 
-```powershell
+```bash
 fingenie quote AAPL
 fingenie quote BTC-USD --merge          # combine sources, flag disagreement
 fingenie history BTC-USD --range 1y
@@ -81,13 +105,14 @@ symbol -> SymbolResolver -> cache lookup -> CapabilityRouter (priority + fallbac
 
 ## Roadmap
 
-Beyond v1: OpenFIGI symbol/ID mapping → FRED macro (series-keyed, pinned-source)
-→ SEC EDGAR fundamentals + `report` + metrics. See the plan for the full,
-researched source catalog (DBnomics, news/sentiment, DeFi, etc.).
+- OpenFIGI symbol mapping, to resolve tickers across sources.
+- More free price sources only when a real gap appears.
+
+Macro data and fundamentals stay out of scope. Use OpenBB for those.
 
 ## Develop
 
-```powershell
+```bash
 pytest          # fully offline (respx-mocked adapters) — no API quota used
 ruff check .
 ```
