@@ -48,11 +48,6 @@ class Settings(BaseSettings):
     finnhub_key: SecretStr | None = None
     twelvedata_key: SecretStr | None = None
 
-    # later-phase keys (unused in v1)
-    fred_key: SecretStr | None = None
-    openfigi_key: SecretStr | None = None
-    edgar_identity: str | None = None
-
     # behaviour
     cache_enabled: bool = True
     user_agent: str = "fingenie/0.1 (+https://github.com/aboutali/fingenie)"
